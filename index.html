@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusinessBuilder - Business Smarts. Simplified.</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --icon-blue: #3498db;
+            --primary-dark: #2c3e50;
+            --light-gray-text: #7f8c8d;
+            --border-color: #e5e7eb;
+            --page-bg: #ffffff;
+            --section-bg-alt: #f9fafb;
+            --btn-startup: #2563eb;
+            --btn-existing-alt: #16a34a;
+            --highlight-red: #ef4444;
+            --font-family: 'Inter', sans-serif;
+            --success-green: #22c55e;
+            --warning-orange: #f97316;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-family);
+            color: var(--primary-dark);
+            line-height: 1.6;
+            background-color: var(--page-bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .container-narrow { max-width: 800px; }
+        h1, h2, h3 { font-weight: 800; }
+        h1 { font-size: 2.8rem; line-height: 1.2; margin-bottom: 1rem; }
+        h2 { font-size: 2.2rem; line-height: 1.3; margin-bottom: 1rem; }
+        h3 { font-size: 1.4rem; line-height: 1.3; margin-bottom: 1rem; }
+        p { font-size: 1.1rem; margin-bottom: 1rem; color: #4b5563 }
+        section { padding: 80px 20px; }
+        .section-heading { text-align: center; margin-bottom: 16px; }
+        .section-intro { max-width: 700px; margin: 0 auto 48px auto; text-align: center; font-size: 1.15rem; }
+        .columns-grid { display: flex; justify-content: space-between; gap: 32px; }
+        
+        .page-header {
+            padding: 1.25rem 20px; border-bottom: 1px solid var(--border-color); background-color: var(--page-bg);
+            position: sticky; top: 0; z-index: 1000; display: flex; justify-content: center;
+        }
+        .header-container { max-width: 1200px; width: 100%; display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: 1rem; text-decoration: none; }
+        .logo-icon { display: flex; gap: 0.5rem; align-items: center; }
+        .icon-bar { width: 4px; height: 50px; background-color: var(--primary-dark); }
+        .icon-blocks { display: flex; flex-direction: column; gap: 4px; }
+        .icon-block { width: 25px; height: 14px; background-color: var(--icon-blue); }
+        .logo-text { display: flex; flex-direction: column; }
+        .logo-title { font-size: 28px; font-weight: 800; color: var(--primary-dark); margin: 0; }
+        .logo-divider-container { display: flex; align-items: center; margin: 4px 0; }
+        .logo-divider { height: 1px; width: 200px; background-color: #bdc3c7; }
+        .logo-divider-dot { width: 6px; height: 6px; border-radius: 50%; background-color: var(--icon-blue); margin-left: -3px; }
+        .logo-tagline { font-size: 16px; color: var(--light-gray-text); margin: 0; }
+        .hero-section { text-align: center; }
+        .hero-section h1 { max-width: 900px; margin-left: auto; margin-right: auto;}
+        .highlight-red { color: var(--highlight-red); }
+        .highlight-blue { color: var(--icon-blue); font-weight: 700; }
+        .hero-subheading { font-size: 1.25rem; line-height: 1.6; max-width: 800px; margin: 24px auto 0 auto; }
+        .how-it-works-section { background-color: var(--section-bg-alt); }
+        .step-column { flex: 1; }
+        .step-content-wrapper { display: flex; gap: 20px; align-items: flex-start; text-align: left; }
+        #change-path-btn { font-size: 0.9rem; padding: 0.5rem 1rem; margin-top: 8px; background-color: var(--btn-existing-alt); }
+        .step-number { font-size: 3rem; font-weight: 800; color: var(--icon-blue); line-height: 1; }
+        .growth-journey-section { background-color: var(--page-bg); }
+        .journey-timeline { max-width: 650px; margin: 48px auto 0 auto; position: relative; }
+        .journey-step { display: flex; align-items: center; position: relative; padding-bottom: 40px; gap: 32px; }
+        .journey-step::before { content: ''; position: absolute; left: 24px; top: 50px; height: calc(100% - 30px); width: 2px; background-color: #dee2e6; }
+        .journey-step:last-child::before { display: none; }
+        .step-marker { width: 50px; height: 50px; background-color: var(--icon-blue); color: #ffffff; border-radius: 50%; font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; z-index: 5; }
+        .playbook-section { background-color: var(--section-bg-alt); }
+        .plan-card { flex: 1; background: var(--page-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 32px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+        .plan-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+        .badge { padding: 4px 12px; border-radius: 999px; font-weight: 800; font-size: 0.8rem; flex-shrink: 0; }
+        .free-badge { background-color: #dcfce7; color: #166534; }
+        .upgrade-badge { background-color: #dbeafe; color: #1e40af; }
+        .feature-list { list-style: none; padding: 0; margin: 24px 0; }
+        .feature-list li { position: relative; padding-left: 32px; margin-bottom: 12px; line-height: 1.5; color: var(--light-gray-text); }
+        .feature-list li strong { color: var(--primary-dark); }
+        .feature-list li::before { content: '✔'; position: absolute; left: 0; top: 0; display: flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; font-weight: 900; color: white;}
+        .plan-card-free .feature-list li::before { background-color: #16a34a; }
+        .plan-card-upgrade .feature-list li::before { background-color: #2563eb; }
+        .questions-section { background-color: var(--primary-dark); color: #ffffff; }
+        .questions-section .section-heading, .questions-section .section-intro { color: #ffffff; }
+        .screenshot-box { background-color: var(--page-bg); color: var(--primary-dark); border-radius: 12px; padding: 32px; text-align: left; max-width: 700px; margin: 48px auto 0 auto; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3); }
+        .canvas-section { background-color: var(--page-bg); }
+        .canvas-title-highlight { display: inline-block; border-bottom: 4px solid var(--icon-blue); padding-bottom: 8px; }
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; font-weight: 700; margin-bottom: 8px; font-size: 0.9rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 1rem; font-family: inherit; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--icon-blue); box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2); }
+        #business-description { resize: vertical; min-height: 100px; }
+        .progress-bar-container { width: 100%; background-color: var(--border-color); border-radius: 8px; overflow: hidden; margin: 32px 0; }
+        .progress-bar { height: 12px; width: 0; background-color: var(--icon-blue); transition: width 0.3s ease; }
+        .progress-text { text-align: center; font-size: 0.9rem; font-weight: 700; margin-top: 8px; color: var(--light-gray-text); }
+        .canvas-block { border: 1px solid var(--border-color); border-left: 5px solid var(--icon-blue); border-radius: 8px; margin-bottom: 16px; background-color: var(--page-bg); }
+        .canvas-block[open] { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .block-summary { display: flex; justify-content: space-between; align-items: center; padding: 20px; cursor: pointer; list-style: none; }
+        .block-summary::-webkit-details-marker { display: none; }
+        .summary-content { display: flex; align-items: center; gap: 20px; }
+        .block-number { width: 40px; height: 40px; background-color: var(--section-bg-alt); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; }
+        .completion-tick { font-size: 1.5rem; font-weight: 700; color: var(--success-green); opacity: 0; transition: opacity 0.2s; }
+        .completion-tick.visible { opacity: 1; }
+        .block-content { padding: 24px; border-top: 1px solid var(--border-color); }
+        .block-intro { font-style: italic; color: var(--light-gray-text); border-left: 3px solid var(--icon-blue); padding-left: 16px; margin: 0 0 24px 0; }
+        .block-content h4 { font-size: 1rem; font-weight: 700; margin: 0 0 8px 0; color: var(--primary-dark); }
+        .question-list { margin: 0 0 24px 0; padding-left: 20px; }
+        .question-list li { margin-bottom: 8px; color: var(--light-gray-text);}
+        .block-content textarea { width: 100%; min-height: 120px; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 1rem; font-family: inherit; box-sizing: border-box; resize: vertical; }
+        .example-link { font-size: 0.9rem; color: var(--icon-blue); cursor: pointer; text-decoration: underline; display: inline-block; margin-top: 8px; }
+        .canvas-actions { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem; padding: 24px 0; }
+        .terms-container { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
+        .terms-container a { color: var(--icon-blue); text-decoration: underline; cursor: pointer; }
+        .action-buttons { display: flex; justify-content: center; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .btn { padding: 0.8rem 1.8rem; border-radius: 8px; color: #fff; font-weight: 700; text-align: center; border: none; cursor: pointer; text-decoration: none; transition: all 0.3s ease; font-size: 1.1rem; }
+        .btn:hover:not(:disabled) { opacity: 0.9; transform: translateY(-2px); }
+        .btn-primary { background-color: var(--btn-startup); }
+        .btn-secondary { background-color: #6c757d; }
+        #install-app-btn { display: none; background-color: #555; }
+        .btn:disabled { background-color: #ccc; cursor: not-allowed; opacity: 0.7; }
+        .resource-menu-btn { background: none; border: none; cursor: pointer; padding: 8px; }
+        .resource-menu-btn-icon { font-size: 28px; line-height: 1; color: var(--primary-dark); }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .modal-overlay.visible { opacity: 1; visibility: visible; }
+        .modal-content { background: white; padding: 32px; border-radius: 12px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; transform: scale(0.9); transition: transform 0.3s ease; }
+        .modal-overlay.visible .modal-content { transform: scale(1); }
+        .modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 24px; cursor: pointer; }
+        .modal-content h3 { margin-top: 0; }
+        .modal-content h4 { margin-top: 1em; }
+        .modal-content ul, .modal-content ol, .modal-content table { padding-left: 20px; }
+        .modal-back-btn { background: none; border: none; font-size: 1rem; color: var(--icon-blue); cursor: pointer; margin-bottom: 16px; font-weight: 700; }
+        .resource-menu-list { list-style: none; padding: 0; }
+        .resource-menu-list li { font-size: 1.2rem; font-weight: 700; padding: 12px 0; border-bottom: 1px solid var(--border-color); cursor: pointer; }
+        .resource-menu-list li:last-child { border-bottom: none; }
+        .resource-menu-list li:hover { color: var(--icon-blue); }
+        .miniscan-question { margin: 16px 0; }
+        .miniscan-options label { margin-right: 20px; }
+        .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: var(--primary-dark); color: white; padding: 12px 24px; border-radius: 8px; z-index: 3000; opacity: 0; visibility: hidden; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .toast.visible { opacity: 1; visibility: visible; }
+        .toast.success { background-color: var(--success-green); }
+        .toast.warning { background-color: var(--warning-orange); }
+        .toast.error { background-color: var(--highlight-red); }
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; } h2 { font-size: 1.8rem; }
+            section { padding: 60px 20px; }
+            .columns-grid { flex-direction: column; align-items: center; gap: 48px; }
+            .step-column, .plan-card { max-width: 450px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="page-header">
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="icon-bar"></div>
+                    <div class="icon-blocks">
+                        <div class="icon-block"></div>
+                        <div class="icon-block"></div>
+                        <div class="icon-block"></div>
+                    </div>
+                </div>
+                <div class="logo-text">
+                    <p class="logo-title">Business Builders</p>
+                    <div class="logo-divider-container">
+                        <div class="logo-divider"></div>
+                        <div class="logo-divider-dot"></div>
+                    </div>
+                    <p class="logo-tagline">Business Smarts. Simplified.</p>
+                </div>
+            </div>
+            <button class="resource-menu-btn" id="resource-menu-btn" aria-label="Open Resources Menu">
+                <span class="resource-menu-btn-icon">🍩</span>
+            </button>
+        </div>
+    </header>
+
+    <main></main>
+    
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close-btn">&times;</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast-notification"></div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ZAPIER_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/24864649/u5lngno/';
+        const OFFLINE_SUBMISSIONS_KEY = 'offlineSubmissionsQueue';
+
+        const content = {
+            canvas: {
+                startup: {
+                    headline: `Most startups <span class="highlight-red">fail</span> because they burn through cash before proving the model. Don't waste months building the wrong thing.`,
+                    subheading: `Our <strong class="highlight-blue">Smart AI Scan + Expert Review</strong> helps you stress-test your idea early, spot hidden risks, and tighten your business model before you run out of time or money.`,
+                    playbook: `<div class="plan-card plan-card-free"><div class="plan-header"><span class="badge free-badge">FREE</span><h3>Business Model Playbook</h3></div><p>In today’s fast-paced market, a great idea isn’t enough. You need a flexible plan that can adapt before mistakes cost you. That’s why your first step is a free AI-powered scan, reviewed personally by Bruce to add human insights.</p><ul class="feature-list"><li>A <strong>visual scorecard</strong> showing how resilient your business is today.</li><li>Pinpointed <strong>blind spots</strong> that could hold you back.</li><li>Tailored, <strong>high-level suggestions</strong> you can actually act on.</li></ul></div><div class="plan-card plan-card-upgrade"><div class="plan-header"><span class="badge upgrade-badge">UPGRADE</span><h3>Personalised Roadmap ($49)</h3></div><p>Once you’ve seen your summary playbook, you’ll have the option to go deeper with a full Business Model Innovation Playbook, combining proven startup frameworks with AI intelligence and expert review.</p><ul class="feature-list"><li>Everything from the free summary.</li><li>The <strong>key challenges</strong> you’ll face as you grow.</li><li>Recommended <strong>redesigns of your business model building blocks</strong>.</li></ul><p style="margin-top: 1rem; font-style: italic; color: var(--primary-dark);"><strong>Next Step:</strong> You will have the option to upgrade to this detailed playbook after receiving your free analysis.</p></div>`,
+                    blocks: [
+                        { title: "Customer Segments", subtitle: "The specific groups of people you sell to", intro: "Define the different groups of people or organisations you aim to reach and serve.", items: ["Who is your ideal first customer (early adopter)?", "What urgent problem are they trying to solve?", "Are there enough of these people to build a business?"], example: `<p><strong>Primary:</strong> Individual tradies (electricians, plumbers) who need fast, reliable morning coffee.</p><p><strong>Secondary:</strong> Small teams (2-5 tradies) with a foreman managing the daily order.</p><p><strong>Blue Ocean Focus:</strong> This café specialises in high-frequency, habitual tradie routines, not the general public.</p>` },
+                        { title: "Value Proposition", subtitle: "The unique benefit that makes you special", intro: "Your value proposition is the reason customers choose to buy from you instead of your competitors.", items: ["What’s the #1 benefit you promise to customers?", "How is your solution different from what’s already out there?", "What’s the one thing you want customers to remember about you?"], example: `<p>The core promise is a morning ritual of reliability and recognition, not just coffee.</p><ul><li>Guaranteed hot coffee, ready on time, with no queuing.</li><li>Pre-set, hearty coffee and food combos tailored for worksite mornings.</li><li>Gamified loyalty streaks and surprise rewards to build habit.</li></ul>` },
+                        { title: "Channels", subtitle: "How you reach and sell to your customers", intro: "Describe how your company communicates with and reaches its Customer Segments to deliver a Value Proposition.", items: ["What’s the simplest way to reach your first customers?", "How will you deliver your product or service?", "Which channels will be most cost-effective at the start?"], example: `<p><strong>Digital:</strong> An installable web app (PWA) for ordering, driven by social media promos and a ManyChat funnel to encourage sign-ups.</p><p><strong>Physical:</strong> A tradie-only pickup lane and branded 'Crew Pack' packaging create a sense of physical exclusivity.</p>` },
+                        { title: "Customer Relationships", subtitle: "How you interact with your customers", intro: "Describe the types of relationships a company establishes with specific Customer Segments.", items: ["How will you collect early feedback to improve your idea?", "What kind of relationship will keep early adopters loyal?", "Could you build a small community around your idea?"], example: `<p>The relationship goes beyond a simple transaction to focus on tradie identity and pride.</p><ul><li>Personalised loyalty streaks for individuals and crews.</li><li>Gamified in-app status like 'Foreman Legend' recognition.</li><li>Predictive suggestions to easily repeat crew orders.</li></ul>` },
+                        { title: "Revenue Streams", subtitle: "How and where you make your money", intro: "Represents the cash a company generates from each Customer Segment.", items: ["What will customers actually pay for?", "What’s the simplest pricing model to start with (one-time, subscription)?", "How will you test if your price is right?"], example: `<p>The engine shifts from one-off sales to predictable, recurring revenue.</p><ul><li>Per-order sales of coffee and bundles.</li><li>Discounted 'Crew Packs' to drive a higher average order value (AOV).</li><li>Weekly/monthly prepaid subscriptions ('Coffee Club for Tradies').</li></ul>` },
+                        { title: "Key Resources", subtitle: "The essential assets your business needs", intro: "Describe the most important assets required to make a business model work.", items: ["What’s necessary to build a simple version (minimum viable product) of your offer?", "What’s your strongest asset right now - idea, team, or funding?", "What resource do you lack, and how will you get it?"], example: `<ul><li>A physical café located near industrial hubs or tradie work routes.</li><li>A highly efficient barista team trained for speed and consistency.</li><li>The PWA ordering system with recurring order and loyalty features.</li><li>Distinctive branding and packaging (grab bags, clear crew labelling).</li></ul>` },
+                        { title: "Key Activities", subtitle: "The most important things your business does", intro: "Describe the most important things a company must do to make its business model work.", items: ["What’s the most critical activity to test your idea (prototype, survey, pilot)?", "Which activities are critical to deliver your value proposition?", "What can you ignore for now to stay lean?"], example: `<ul><li>Operational standardisation to ensure speed and consistency in bundles.</li><li>Managing the PWA for recurring orders, streaks, and loyalty.</li><li>Running the marketing funnel (Social -> ManyChat -> App Download).</li><li>Community engagement through gamified recognition and rewards.</li></ul>` },
+                        { title: "Key Partnerships", subtitle: "The other companies you rely on", intro: "Describe the network of suppliers and partners that make the business model work.", items: ["Who could help you reach customers faster?", "Who could provide resources or expertise you don’t have?", "What would they want from you in return?"], example: `<p>The focus is on partners that provide embedded access to the customer segment.</p><ul><li>Local food suppliers for rolls and pastries.</li><li>Tech providers for the PWA and payment systems.</li><li>Partnerships with local tradie associations and supply stores.</li></ul>` },
+                        { title: "Cost Structure", subtitle: "All the costs involved in your business", intro: "Describes all important costs incurred to operate a business model.", items: ["What are the most significant costs to get off the ground?", "What’s your estimated monthly burn rate?", "How can you keep early costs as low as possible?"], example: `<ul><li>Staff wages for baristas and packaging assistance.</li><li>Ingredient sourcing (coffee beans, rolls, snacks).</li><li>Technology build and maintenance for the PWA.</li><li>Marketing spend on social ads and local partnerships.</li></ul>` }
+                    ]
+                },
+                existing: {
+                    headline: `Imagine a business where <span class="highlight-red"><strong>cash flow is steady, profits grow</strong></span>, and you finally have time to work on your business — not just in it.`,
+                    subheading: `That’s what the right business model delivers. With our <strong class="highlight-blue">Smart AI Scan + Expert Review</strong>, you’ll uncover growth and profit opportunities, unlock hidden efficiencies, and design a model built for the future.`,
+                    playbook: `<div class="plan-card plan-card-free"><div class="plan-header"><span class="badge free-badge">FREE</span><h3>Business Model Playbook</h3></div><p>To reignite growth, you need innovation in your business model. Our Free Summary Playbook, personally reviewed by Bruce, gives you a clear snapshot of your current position and highlights where changes could deliver significant impact.</p><ul class="feature-list"><li>A <strong>visual scorecard</strong> rating each key part of your business.</li><li><strong>Weak points flagged</strong> and linked directly to risks.</li><li>A high-level view of <strong>opportunities unlocked</strong> by redesign.</li></ul></div><div class="plan-card plan-card-upgrade"><div class="plan-header"><span class="badge upgrade-badge">UPGRADE</span><h3>Innovation Playbook ($49)</h3></div><p>If you’re ready to go deeper, this upgraded roadmap blends AI insights with Bruce’s expertise to give you specific recommendations and show the ripple effects of those changes across your business.</p><ul class="feature-list"><li>Everything in the free summary.</li><li>Bruce’s <strong>specific recommendations for change</strong>.</li><li>The <strong>ripple effects</strong> on profitability and growth.</li></ul><p style="margin-top: 1rem; font-style: italic; color: var(--primary-dark);"><strong>Next Step:</strong> You will have the option to upgrade to this detailed playbook after receiving your free analysis.</p></div>`,
+                    blocks: [
+                        { title: "Customer Segments", subtitle: "The specific groups of people you sell to", intro: "The goal is to understand who your customers are.", items: ["Who are your most profitable customers today?", "Which segment is growing fastest?", "Are there customers you serve that aren’t worth it?"], example: "e.g., Airbnb serves a two-sided market: 'Hosts' (property owners who want to earn money from their space) and 'Guests' (travellers seeking unique, local accommodation)." },
+                        { title: "Value Proposition", subtitle: "The unique benefit that makes you special", intro: "Your value proposition is the reason customers choose to buy from you instead of your competitors.", items: ["Why do your best customers choose you over competitors?", "Is your value becoming less unique over time?", "Could you enhance your offer to charge more or boost loyalty?"], example: "e.g., For Guests: 'Belong Anywhere' by staying in unique homes instead of generic hotels. For Hosts: A flexible way to monetise their property with the trust and security of a global brand." },
+                        { title: "Channels", subtitle: "How you reach and sell to your customers", intro: "The goal is to analyse and optimise your channels of distribution, sales, and communication.", items: ["Which channel attracts the most customers?", "Which ones underperform or cost too much?", "Do your channels match how customers want to be reached?"], example: "e.g., The Airbnb website and mobile app are the primary channels. They acquire users through word-of-mouth, performance marketing (Google/social ads), and content (travel guides)." },
+                        { title: "Customer Relationships", subtitle: "How you interact with your customers", intro: "Your business's relationships with customers may vary from personal to automated.", items: ["How effective are you at keeping current customers?", "What costs more: acquiring new customers or retaining existing ones?", "Is your relationship primarily transactional?"], example: "e.g., Largely automated and self-service. Trust is built through profiles, a public review/rating system, and secure messaging. Human customer support is available for resolving issues." },
+                        { title: "Revenue Streams", subtitle: "How and where you make your money", intro: "The goal is to analyse your revenue structure to ensure it aligns with your Value Proposition.", items: ["Are you too reliant on one revenue source?", "Which customer segments are the most profitable?", "Could you add recurring revenue streams?"], example: "e.g., A commission-based model. Airbnb charges a service fee to Guests (e.g., 6-12% of the booking) and a smaller processing fee to Hosts (e.g., 3%) on every transaction." },
+                        { title: "Key Resources", subtitle: "The essential assets your business needs", intro: "The goal is to analyse your business's assets and inputs (resources) required to operate effectively.", items: ["Which resources (staff, brand, equipment) give you an edge?", "What happens if you lose a key person or asset?", "Are any of your resources underused?"], example: "e.g., The most critical resource is the technology platform itself. Other key resources are the globally recognised brand and the network effect of its vast community of hosts and guests." },
+                        { title: "Key Activities", subtitle: "The most important things your business does", intro: "The goal is to analyse the essential tasks and processes you must perform.", items: ["Which daily activities create the most value for customers?", "Which ones are inefficient or could be automated?", "Which activities are most critical to your revenue?"], example: "e.g., Developing and maintaining the platform (website/app). Marketing to acquire new hosts and guests. Managing trust and safety through reviews, verification, and support services." },
+                        { title: "Key Partnerships", subtitle: "The other companies you rely on", intro: "The suppliers and partners on which your business depends.", items: ["Are your current partners helping or hindering you?", "Are you too dependent on a single supplier?", "Could new partnerships reduce costs or open new markets?"], example: "e.g., Payment gateways (Stripe, Adyen) are critical. Partnerships also include freelance photographers who professionalise listings, and insurance companies that provide Host Guarantees." },
+                        { title: "Cost Structure", subtitle: "All the costs involved in your business", intro: "The goal is to analyse your cost structure to ensure it aligns with your business model.", items: ["What are your most significant costs?", "Are costs growing faster than revenue?", "Where can you cut costs without losing value?"], example: "e.g., The main costs are platform maintenance and development, marketing and advertising spend, and employee salaries. Transaction fees for payment processing are a significant variable cost." }
+                    ]
+                }
+            },
+            resources: {
+                title: "<h3>Resources & Help</h3>",
+                items: {
+                    mini_scan: {
+                      "title": "The 5-Minute Viability Test", "is_interactive": true,
+                      "initial_prompt": { "heading": "Test Your Value Proposition", "instruction": "In one sentence, what is the unique benefit you provide to your customers?" },
+                      "questions": [
+                        { "text": "Is your value proposition immediately understandable to a stranger?", "points": 1 },
+                        { "text": "Does it solve a painful 'must-have' problem, not just a 'nice-to-have'?", "points": 1 },
+                        { "text": "Is it clearly different from your competitors' offerings?", "points": 1 },
+                        { "text": "Does it promise a specific, measurable outcome (e.g., 'saves 5 hours/month')?", "points": 1 }
+                      ],
+                      "results": [
+                        { "score_threshold": 4, "title": "Strong Foundation (Score: 4/4)", "feedback": "This is an excellent start. Your value proposition is clear, specific, and solves a real problem. The next crucial step is to build a business model that can profitably deliver on this promise." },
+                        { "score_threshold": 2, "title": "Good Potential (Score: 2-3/4)", "feedback": "You have the seeds of a strong idea, but it needs sharpening. It might be too general, or its uniqueness isn't clear enough. This is a perfect time to use the full canvas to refine your approach." },
+                        { "score_threshold": 0, "title": "Opportunity for Reflection (Score: 0-1/4)", "feedback": "This is a valuable moment to pause and reflect. Your current proposition may not be solving a strong enough problem for a specific customer. This is a normal part of the process! Let's use the full canvas to explore the customer problem more deeply." }
+                      ]
+                    },
+                    blue_ocean_example: {
+                        "title": "Plotting Uncontested Market Space",
+                        "content": "<h4>Chart Your Own Course: A Blue Ocean Example</h4><p>Competing head-to-head with established players is exhausting. Blue Ocean Strategy is about creating your own market space, making the competition irrelevant.</p><p>Think of it like this: a <strong>'Red Ocean'</strong> is full of sharks (competitors) all fighting over the same pool of fish (customers). A <strong>'Blue Ocean'</strong> is a clear, open body of water that you discover by offering a completely new kind of value.</p><hr><h4>How to Read the Chart</h4><p>The Strategy Canvas is a simple tool to find your Blue Ocean. It maps your business against the competition.</p><ul><li><strong>The Bottom Axis:</strong> Lists the key factors the industry competes on.</li><li><strong>The Side Axis:</strong> Shows the offering level for each factor, from low to high.</li><li><strong>The Value Curves:</strong> Each line, or 'value curve,' represents a company's strategy. Where the lines overlap is where competition is fierce (the Red Ocean).</li></ul><hr><h4>Example: The Tradie-Focused Café</h4><p>Here’s how the Tradie Café idea (from the Startup example) compares to major competitors on the key factors you identified:</p><div style='overflow-x:auto;'><table style='width:100%; border-collapse: collapse;'><thead style='background-color: #f9fafb;'><tr><th style='padding: 8px; border: 1px solid #e5e7eb;'>Competitive Factor</th><th style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Tradie Café</th><th style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Starbucks</th><th style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Hey You</th><th style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Uber Eats</th></tr></thead><tbody><tr><td style='padding: 8px; border: 1px solid #e5e7eb;'><strong>Speed of Pickup</strong></td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>High</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Low</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>High</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Low</td></tr><tr><td style='padding: 8px; border: 1px solid #e5e7eb;'><strong>Predictable Hot Coffee</strong></td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>High</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Medium</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Medium</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Low</td></tr><tr><td style='padding: 8px; border: 1px solid #e5e7eb;'><strong>Tradie-Specific Bundles</strong></td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>High</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Low</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Low</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Low</td></tr><tr><td style='padding: 8px; border: 1px solid #e5e7eb;'><strong>Micro-Team Ordering</strong></td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>High</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Low</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Low</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Medium</td></tr><tr><td style='padding: 8px; border: 1px solid #e5e7eb;'><strong>Recurring Subscriptions</strong></td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>High</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Low</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Low</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Medium</td></tr><tr><td style='padding: 8px; border: 1px solid #e5e7eb;'><strong>Loyalty & Streaks</strong></td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>High</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Medium</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Low</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Low</td></tr><tr><td style='padding: 8px; border: 1px solid #e5e7eb;'><strong>Emotional Engagement</strong></td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>High</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Medium</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Low</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Low</td></tr><tr><td style='padding: 8px; border: 1px solid #e5e7eb;'><strong>Menu Variety</strong></td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Low</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>High</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>High</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>High</td></tr><tr><td style='padding: 8px; border: 1px solid #e5e7eb;'><strong>Price (Low to High)</strong></td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Medium</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>High</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>Medium</td><td style='padding: 8px; border: 1px solid #e5e7eb; text-align:center;'>High</td></tr></tbody></table></div><hr><h4>Visualising the Blue Ocean</h4><p>When plotted, the chart would clearly show the two different market spaces. An area with a <span style='color:red;'><strong>red fill</strong></span> would highlight the <strong>'Red Ocean,'</strong> where Starbucks, Hey You, and Uber Eats are clustered together, all competing fiercely on factors like 'Menu Variety'.</p><p>The Tradie Café's value curve would diverge dramatically. It deliberately scores low on 'Menu Variety' but soars high on new factors the others ignore. The vast area between the Tradie Café's curve and the competitors' curves is the <strong>'uncontested market space'</strong> — an area that could be shown with a <span style='color:blue;'><strong>blue fill</strong></span>, representing your <strong>Blue Ocean</strong>.</p>"
+                    },
+                    privacy: { "title": "Privacy & Your Data", "content": "<h4>Privacy & Your Data</h4><p>We believe in treating your ideas with the same respect we'd want for our own. Here’s our simple promise to you:</p><ul><li><strong>What we collect:</strong> We collect your name, email, and the business details you provide in the canvas.</li><li><strong>Why we collect it:</strong> This information is used exclusively to generate your personalised Summary Playbook and to email it to you.</li><li><strong>Confidentiality:</strong> Your business ideas and personal data are treated as strictly confidential. We will never share your information with third parties.</li></ul><p>Our goal is to help you succeed, and that begins with trust.</p>" },
+                    faqs: { "title": "FAQs", "content": "<h4>FAQs</h4><p><strong>How is my data used?</strong><br>Your data is used solely to generate your free playbook. It is kept confidential and is never shared.</p><p><strong>Is the review really done by a person?</strong><br>Yes. The initial AI scan provides a baseline, but Bruce personally reviews every submission to add his expert insights.</p><p><strong>What happens after I get the free playbook?</strong><br>The playbook is yours to keep and use. You will also have the option, but no obligation, to purchase a more detailed Innovation Playbook for $49.</p>" },
+                    glossary: { "title": "Glossary of Terms", "content": "<h4>Glossary of Terms</h4><p><strong>MVP (Minimum Viable Product):</strong> The simplest version of your product that you can release to get feedback from real users.</p><p><strong>Burn Rate:</strong> The rate at which your company is spending money, usually measured monthly.</p><p><strong>Value Proposition:</strong> The core promise of value you make to your customers.</p>" }
+                },
+                ios_install: `<h4>Install on your iPhone</h4><p>To install this app on your device for easy access, please follow these simple steps:</p><ol><li>Tap the <strong>Share</strong> icon (a box with an arrow pointing up) at the bottom of your Safari browser.</li><li>Scroll down the list and tap on <strong>'Add to Home Screen'</strong>.</li><li>Confirm by tapping 'Add' in the top-right corner.</li></ol>`,
+                terms_of_use: `<h3>Terms of Use</h3><p>By submitting your business information through this tool, you agree to the following terms:</p><ol><li><strong>Service Purpose:</strong> This tool is for informational and educational purposes. The analysis provided is based on the data you enter and should not be considered professional financial or legal advice.</li><li><strong>Data Confidentiality:</strong> We are committed to protecting your data. Your submissions are confidential and will not be shared with third parties. Please see our Privacy Policy for more details.</li><li><strong>No Guarantees:</strong> While we strive to provide valuable insights, we make no guarantees about the success or viability of your business idea. Market conditions and execution are critical factors beyond the scope of this analysis.</li><li><strong>Intellectual Property:</strong> You retain all intellectual property rights to your business idea. Submitting your data does not grant us any ownership or rights to your IP.</li></ol><p>By checking the 'I agree' box, you acknowledge that you have read, understood, and agree to these terms.</p>`
+            }
+        };
+        let appResources = {};
+
+        const appState = { path: 'startup', name: '', email: '' };
+
+        // --- 2. DOM ELEMENTS & STATE ---
+        const mainContent = document.querySelector('main');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalBody = document.getElementById('modal-body');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const resourceMenuBtn = document.getElementById('resource-menu-btn');
+        const toast = document.getElementById('toast-notification');
+        let deferredInstallPrompt = null;
+        let isOnline = navigator.onLine;
+        
+        function getOrSetInstanceId() {
+            let instanceId = localStorage.getItem('businessBuilderInstanceId');
+            if (!instanceId) {
+                instanceId = crypto.randomUUID();
+                localStorage.setItem('businessBuilderInstanceId', instanceId);
+            }
+            return instanceId;
+        }
+        const userInstanceId = getOrSetInstanceId();
+
+        // --- 3. INITIALIZATION ---
+        async function initializeApp() {
+            const urlParams = new URLSearchParams(window.location.search);
+            appState.path = urlParams.get('path') || 'startup';
+            appState.name = urlParams.get('name') || '';
+            appState.email = urlParams.get('email') || '';
+            
+            // All content is now embedded, no need to fetch
+            appResources = content.resources;
+            
+            buildPage();
+            setupGlobalEventListeners();
+            
+            if (isOnline) {
+                syncOfflineSubmissions();
+            }
+            
+            // Register Service Worker
+            if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname.endsWith('.netlify.app'))) {
+              window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                  .then(registration => {
+                    console.log('Service Worker registered successfully:', registration);
+                  })
+                  .catch(error => {
+                    console.error('Service Worker registration failed:', error);
+                  });
+              });
+            }
+        }
+
+        // --- 4. PAGE BUILDING ---
+        function buildPage() {
+            const pathContent = content.canvas[appState.path];
+            
+            mainContent.innerHTML = `
+                <section class="hero-section"> <div class="container"> <h1>${pathContent.headline}</h1> <p class="hero-subheading">${pathContent.subheading}</p> </div> </section>
+                <section class="how-it-works-section"> <div class="container"> <h2 class="section-heading">How It Works</h2> <div class="columns-grid"> <div class="step-column"><div class="step-content-wrapper"><div class="step-number">1.</div><div><h3>Choose Your Path</h3><p>You've identified your business stage. The questions ahead are tailored for you.<br><button id="change-path-btn" class="btn"></button></p></div></div></div> <div class="step-column"><div class="step-content-wrapper"><div class="step-number">2.</div><div><h3>Build Your Canvas</h3><p>Answer simple questions for each of the 9 building blocks. Your progress is saved automatically, even if you go offline.</p></div></div></div> <div class="step-column"><div class="step-content-wrapper"><div class="step-number">3.</div><div><h3>Receive Your Free Analysis</h3><p>Submit your canvas for a free, one-page playbook—<strong>personally reviewed and sent within 24 hours.</strong></p></div></div></div> </div> </div> </section>
+                <section class="growth-journey-section"> <div class="container"> <h2 class="section-heading">Your Growth Journey</h2> <div class="journey-timeline"><div class="journey-step"><div class="step-marker">1</div><div><h3>Free AI + Human Scan</h3><p>Start with a clear snapshot of your business model's strengths and weaknesses.</p></div></div><div class="journey-step"><div class="step-marker">2</div><div><h3>Step 1: The Innovation Playbook ($49)</h3><p>Receive a detailed AI Diagnostic Report, the foundational analysis required for the full strategic journey.</p></div></div><div class="journey-step"><div class="step-marker">3</div><div><h3>The Blue Ocean Strategy Ladder</h3><p>A premium, invitation-only engagement personally guided by Bruce to achieve a complete strategic transformation.</p></div></div></div> </div> </section>
+                <section class="playbook-section"> <div class="container"> <h2 class="section-heading">From Free Scan to Actionable Playbook</h2> <div class="columns-grid">${pathContent.playbook}</div> </div> </section>
+                <section class="questions-section"> <div class="container"> <h2 class="section-heading">We Ask the Right Questions</h2> <div class="screenshot-box"><p>Currently Editing: <strong>Customer Segments</strong></p><h4>Who is your single most important customer?</h4><p>Describe them as if they were a real person. What is their main goal?</p></div> </div> </section>
+                <section class="canvas-section"> <div class="container container-narrow"> <h2 class="section-heading canvas-title-highlight">Build Your Business Canvas</h2><p class="section-intro">You're at the final step. The clarity and detail you provide here will directly enhance the quality of your personalised analysis. Let's begin.</p>
+                <div class="form-group"><label for="business-name">Business / Idea Name</label><input type="text" id="business-name" name="business_name" placeholder="e.g., Acme Innovations" required></div>
+                <div class="form-group"><label for="business-description">Brief Description</label><textarea id="business-description" name="description" placeholder="e.g., We sell eco-friendly coffee supplies to local cafes." required></textarea></div>
+                <div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div> <p class="progress-text" id="progress-text">0 of 9 Blocks Completed</p>
+                <div id="canvas-container"></div>
+                <div class="canvas-actions"> <div class="terms-container"><input type="checkbox" id="terms-checkbox"><label for="terms-checkbox">I agree to the <a id="terms-link">Terms of Use</a></label></div><div class="action-buttons"><button id="install-app-btn" class="btn btn-secondary">Download App</button> <button id="submit-btn" class="btn btn-primary" disabled>Submit For Free Analysis</button></div></div> </div> </section>
+            `;
+            
+            document.getElementById('change-path-btn').textContent = `Change Path to ${appState.path === 'startup' ? 'Existing Business' : 'Startup'}`;
+
+            const canvasContainer = document.getElementById('canvas-container');
+            pathContent.blocks.forEach((block, index) => {
+                const blockHTML = `<details class="canvas-block" data-index="${index}"><summary class="block-summary"><div class="summary-content"><div class="block-number">${index + 1}</div><div class="block-titles"><h3>${block.title}</h3><p>${block.subtitle}</p></div></div><div class="completion-tick">✔</div></summary><div class="block-content"><p class="block-intro">${block.intro}</p><h4>Guiding Questions</h4><ul class="question-list">${block.items.map(item => `<li>${item}</li>`).join('')}</ul><textarea placeholder="Type your notes here..."></textarea><a class="example-link" data-example-index="${index}">See an example</a></div></details>`;
+                canvasContainer.insertAdjacentHTML('beforeend', blockHTML);
+            });
+            
+            loadProgressFromLocalStorage();
+            setupDynamicEventListeners();
+        }
+
+        // --- 5. EVENT LISTENERS ---
+        function setupGlobalEventListeners() {
+            window.addEventListener('online', handleOnlineStatusChange);
+            window.addEventListener('offline', handleOnlineStatusChange);
+            window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+            resourceMenuBtn.addEventListener('click', () => openModal('resources', 'menu'));
+            modalCloseBtn.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+            modalBody.addEventListener('click', handleModalClick);
+        }
+
+        function setupDynamicEventListeners() {
+            mainContent.addEventListener('input', handleCanvasInput);
+            mainContent.addEventListener('click', handleCanvasClick);
+            document.getElementById('submit-btn').addEventListener('click', handleSubmit);
+            document.getElementById('change-path-btn').addEventListener('click', handleChangePath);
+            document.getElementById('install-app-btn').addEventListener('click', handleInstallClick);
+            document.getElementById('terms-checkbox').addEventListener('change', handleTermsCheck);
+            document.getElementById('terms-link').addEventListener('click', () => openModal('terms_of_use'));
+            manageInstallButtonVisibility();
+        }
+
+        function handleOnlineStatusChange() {
+            isOnline = navigator.onLine;
+            if (isOnline) {
+                showToast('You are back online. Syncing any saved data.', 3000, 'success');
+                syncOfflineSubmissions();
+            } else {
+                showToast('You are offline. Progress is saved locally.', 3000, 'warning');
+            }
+        }
+        
+        function handleCanvasInput(e) {
+            if (e.target.matches('#business-name, #business-description, .canvas-block textarea')) {
+                saveProgressToLocalStorage(); 
+                updateProgressUI();
+            }
+        }
+        
+        function handleCanvasClick(e) {
+            if (e.target.classList.contains('example-link')) {
+                const index = e.target.dataset.exampleIndex;
+                const exampleContent = content.canvas[appState.path].blocks[index].example;
+                openModal('example', exampleContent);
+            }
+        }
+        
+        function handleChangePath() {
+            appState.path = appState.path === 'startup' ? 'existing' : 'startup';
+            clearLocalStorageAndForm(); 
+            buildPage();
+            window.scrollTo(0, 0);
+        }
+
+        function handleTermsCheck(e) {
+            document.getElementById('submit-btn').disabled = !e.target.checked;
+        }
+        
+        function handleModalClick(e) {
+            const resourceKey = e.target.dataset.resourceKey;
+            if (resourceKey && appResources.items[resourceKey]) {
+                const resource = appResources.items[resourceKey];
+                if (resource.is_interactive) {
+                    buildMiniScan(resource);
+                } else {
+                    openModal(resourceKey, resource.content);
+                }
+            } else if (e.target.classList.contains('modal-back-btn')) {
+                openModal('resources', 'menu');
+            }
+        }
+        
+        function manageInstallButtonVisibility() {
+            const installBtn = document.getElementById('install-app-btn');
+            if (deferredInstallPrompt) {
+                installBtn.style.display = 'inline-block';
+            } else {
+                installBtn.style.display = 'none';
+            }
+        }
+        
+        function handleBeforeInstallPrompt(e) {
+            e.preventDefault();
+            deferredInstallPrompt = e;
+            manageInstallButtonVisibility();
+        }
+        
+        async function handleInstallClick() {
+            if (deferredInstallPrompt) {
+                deferredInstallPrompt.prompt();
+                const { outcome } = await deferredInstallPrompt.userChoice;
+                deferredInstallPrompt = null;
+                manageInstallButtonVisibility();
+            } else if (/(iPad|iPhone|iPod)/g.test(navigator.userAgent)) {
+                openModal('ios_install');
+            }
+        }
+        
+        async function syncOfflineSubmissions() {
+            const submissions = JSON.parse(localStorage.getItem(OFFLINE_SUBMISSIONS_KEY) || '[]');
+            if (submissions.length === 0) return;
+
+            showToast(`Syncing ${submissions.length} saved submission(s)...`, 3000);
+            for (const payload of submissions) {
+                try {
+                    await fetch(ZAPIER_WEBHOOK_URL, {
+                        method: 'POST',
+                        body: JSON.stringify(payload),
+                        headers: { 'Content-Type': 'application/json' },
+                    });
+                } catch (error) {
+                    console.error('Sync failed for a submission:', error);
+                    return; // Stop if one fails, it will retry next time online
+                }
+            }
+            localStorage.removeItem(OFFLINE_SUBMISSIONS_KEY);
+            showToast('All saved data has been successfully synced!', 3000, 'success');
+        }
+
+        function saveProgressToLocalStorage() {
+            const savedDataKey = `canvasProgress_${appState.path}`;
+            const notes = Array.from(document.querySelectorAll('.canvas-block textarea')).map(ta => ta.value);
+            const dataToSave = {
+                businessName: document.getElementById('business-name').value,
+                description: document.getElementById('business-description').value,
+                notes: notes
+            };
+            localStorage.setItem(savedDataKey, JSON.stringify(dataToSave));
+        }
+
+        function loadProgressFromLocalStorage() {
+            const savedDataKey = `canvasProgress_${appState.path}`;
+            const savedData = JSON.parse(localStorage.getItem(savedDataKey) || '{}');
+            document.getElementById('business-name').value = savedData.businessName || '';
+            document.getElementById('business-description').value = savedData.description || '';
+            document.querySelectorAll('.canvas-block textarea').forEach((ta, index) => {
+                ta.value = savedData.notes?.[index] || '';
+            });
+            updateProgressUI();
+        }
+
+        function clearLocalStorageAndForm() {
+            const paths = ['startup', 'existing'];
+            paths.forEach(path => localStorage.removeItem(`canvasProgress_${path}`));
+        }
+
+        async function handleSubmit() {
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+
+            const savedDataKey = `canvasProgress_${appState.path}`;
+            const savedData = JSON.parse(localStorage.getItem(savedDataKey) || '{}');
+            
+            const userName = appState.name;
+            const userEmail = appState.email;
+            
+            if (!savedData.businessName || !savedData.description || !userName || !userEmail) {
+                showToast("User details are missing. Please return via the link from the chat.", 4000, "error");
+                submitBtn.textContent = 'Submit For Free Analysis';
+                document.getElementById('terms-checkbox').dispatchEvent(new Event('change'));
+                return;
+            }
+            
+            const payload = {
+                instanceId: userInstanceId,
+                name: userName, email: userEmail, 
+                businessName: savedData.businessName, description: savedData.description, 
+                path: appState.path,
+                canvas: content.canvas[appState.path].blocks.reduce((acc, block, i) => {
+                    acc[block.title] = savedData.notes?.[i] || '';
+                    return acc;
+                }, {}),
+                submittedAt: new Date().toISOString()
+            };
+
+            const queueSubmission = () => {
+                const submissions = JSON.parse(localStorage.getItem(OFFLINE_SUBMISSIONS_KEY) || '[]');
+                if (!submissions.some(s => s.instanceId === payload.instanceId)) {
+                    submissions.push(payload);
+                    localStorage.setItem(OFFLINE_SUBMISSIONS_KEY, JSON.stringify(submissions));
+                }
+                showToast('Submission saved. It will be sent automatically when you are back online.', 4000, 'warning');
+            };
+
+            if (isOnline) {
+                try {
+                    const response = await fetch(ZAPIER_WEBHOOK_URL, {
+                        method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'application/json' },
+                    });
+                    if (response.ok) {
+                        submitBtn.textContent = 'Submission Successful!';
+                        showToast("Success! Your playbook will be in your inbox within 24 hours.", 4000, 'success');
+                        clearLocalStorageAndForm();
+                    } else { throw new Error('Server returned an error.'); }
+                } catch (error) {
+                    console.error('Submission failed:', error);
+                    queueSubmission();
+                }
+            } else {
+                queueSubmission();
+            }
+
+            setTimeout(() => {
+                if (submitBtn.textContent !== 'Submission Successful!') {
+                    submitBtn.textContent = 'Submit For Free Analysis';
+                    document.getElementById('terms-checkbox').dispatchEvent(new Event('change'));
+                }
+            }, 2000);
+        }
+
+        const backButton = `<button class="modal-back-btn">&larr; Back to Resources</button>`;
+
+        function openModal(type, data = null) {
+            let contentHTML = '';
+            
+            if (type === 'resources' && data === 'menu') {
+                contentHTML = `${appResources.title}<ul class="resource-menu-list">`;
+                for (const key in appResources.items) {
+                    contentHTML += `<li data-resource-key="${key}">${appResources.items[key].title}</li>`;
+                }
+                contentHTML += `</ul>`;
+            } else if (type === 'example') {
+                contentHTML = `${backButton}<h3>Example</h3>${data}`;
+            } else if (type === 'ios_install') {
+                contentHTML = `${backButton}${appResources.ios_install}`;
+            } else if (type === 'terms_of_use') {
+                contentHTML = appResources.terms_of_use;
+            } else if (appResources.items[type] && appResources.items[type].content) {
+                contentHTML = `${backButton}${appResources.items[type].content}`;
+            }
+
+            modalBody.innerHTML = contentHTML;
+            modalOverlay.classList.add('visible');
+        }
+        
+        function closeModal() {
+            modalOverlay.classList.remove('visible');
+        }
+        
+        let toastTimeout;
+        function showToast(message, duration = 3000, type = '') {
+            clearTimeout(toastTimeout);
+            toast.textContent = message;
+            toast.className = 'toast visible';
+            if (type) toast.classList.add(type);
+            toastTimeout = setTimeout(() => { toast.classList.remove('visible'); }, duration);
+        }
+        
+        function updateProgressUI() {
+            const savedDataKey = `canvasProgress_${appState.path}`;
+            const savedData = JSON.parse(localStorage.getItem(savedDataKey) || '{}');
+            const completedCount = savedData.notes?.filter(note => note.trim() !== '').length || 0;
+            const totalCount = 9;
+            const percentage = (completedCount / totalCount) * 100;
+            
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+            document.getElementById('progress-text').textContent = `${completedCount} of ${totalCount} Blocks Completed`;
+            
+            document.querySelectorAll('.canvas-block').forEach((block, index) => {
+                const tick = block.querySelector('.completion-tick');
+                if (savedData.notes?.[index]?.trim()) {
+                    tick.classList.add('visible');
+                } else {
+                    tick.classList.remove('visible');
+                }
+            });
+        }
+        
+        function buildMiniScan(scanData) {
+            let formHTML = `${backButton}<h3>${scanData.initial_prompt.heading}</h3><p>${scanData.initial_prompt.instruction}</p><form id="mini-scan-form">`;
+            scanData.questions.forEach((q, index) => {
+                formHTML += `<div class="miniscan-question"><p><strong>Q${index + 1}:</strong> ${q.text}</p><div class="miniscan-options"><label><input type="radio" name="q${index}" value="1" required> Yes</label><label><input type="radio" name="q${index}" value="0"> No</label></div></div>`;
+            });
+            formHTML += `<button type="submit" class="btn btn-primary">Calculate Score</button></form><div id="mini-scan-results" style="margin-top: 20px;"></div>`;
+            modalBody.innerHTML = formHTML;
+            document.getElementById('mini-scan-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                calculateAndShowScore(scanData);
+            });
+        }
+        
+        function calculateAndShowScore(scanData) {
+            const form = document.getElementById('mini-scan-form');
+            const formData = new FormData(form);
+            let score = 0;
+            for (const value of formData.values()) {
+                score += parseInt(value);
+            }
+            
+            let resultToShow;
+            for (const result of scanData.results) {
+                if (score >= result.score_threshold) {
+                    resultToShow = result;
+                    break;
+                }
+            }
+            const resultsDiv = document.getElementById('mini-scan-results');
+            resultsDiv.innerHTML = `<h4>${resultToShow.title}</h4><p>${resultToShow.feedback}</p>`;
+        }
+
+        // --- 9. START THE APP ---
+        initializeApp();
+    });
+    </script>
+
+</body>
+</html>
+
